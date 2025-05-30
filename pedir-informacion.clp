@@ -21,7 +21,7 @@
    ?i <- (info-faltante (campo preferencia-alimentaria))
    (preferencia-picante (desea ?p&:(neq ?p si)))
    =>
-   (printout t crlf "¿Tiene alguna restricción alimentaria? (vegana / vegetariana / sin_lactosa / sin_gluten / ninguna): " crlf)
+   (printout t crlf "¿Tiene alguna restricción alimentaria? (vegana / vegetariana / sin_lactosa / sin_gluten / ninguna): " )
    (bind ?resp (lowcase (read)))
    (if (opcion-valida? ?resp (create$ vegana vegetariana sin_lactosa sin_gluten ninguna)) then
       (assert (preferencia-alimentaria (tipo ?resp)))
@@ -38,7 +38,7 @@
    ?i <- (info-faltante (campo preferencia-picante))
    (momento (tipo ?m&:(or (eq ?m comida) (eq ?m cualquiera)))) ; solo se pregunta si es comida o cualquiera
    =>
-   (printout t crlf "¿Desea que la receta sea picante? (si / no / cualquiera): " crlf)
+   (printout t crlf "¿Desea que la receta sea picante? (si / no / cualquiera): " )
    (bind ?resp (lowcase (read)))
    (if (opcion-valida? ?resp (create$ si no cualquiera)) then
       (assert (preferencia-picante (desea ?resp)))
@@ -66,7 +66,7 @@
 (declare (salience 100))
    ?i <- (info-faltante (campo momento))
    =>
-   (printout t crlf "¿Para qué momento del día busca la receta? (desayuno / comida / postre / cualquiera): " crlf)
+   (printout t crlf "¿Para qué momento del día busca la receta? (desayuno / comida / postre / cualquiera): ")
    (bind ?resp (lowcase (read)))
    (if (opcion-valida? ?resp (create$ desayuno comida postre cualquiera)) then
       (assert (momento (tipo ?resp)))

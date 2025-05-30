@@ -7,6 +7,7 @@
 ; DEFINO LOS TEMPLATES
 (deftemplate info-faltante (slot campo))
 (deftemplate justificacion (slot campo) (slot valor))
+(deftemplate explicacion (slot receta) (slot texto1) (slot texto2) (slot texto3))
 
 (deftemplate receta
 (slot similitud) ; NUEVO PARA INCERTIDUMBRE
