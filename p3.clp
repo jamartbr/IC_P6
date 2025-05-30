@@ -9,6 +9,7 @@
 (deftemplate justificacion (slot campo) (slot valor))
 
 (deftemplate receta
+(slot similitud) ; NUEVO PARA INCERTIDUMBRE
 (slot nombre)   ; necesario
 (slot introducido_por) ; necesario
 (slot numero_personas)  ; necesario
@@ -50,6 +51,19 @@
 (deftemplate es-verdura (slot name))
 (deftemplate es-condimento (slot name))
 
+; PARA INCERTIDUMBRE
+(deftemplate preferencia
+  (slot campo)     ; dificultad, duracion, numero_personas
+  (slot valor)
+  (slot certeza))  ; 1.0 si es respuesta segura
+
+(deftemplate FactorCerteza
+  (slot receta)
+  (slot fc))
+
+(deftemplate SimilitudTotal
+  (slot receta)
+  (slot valor))
 
 ; hechos de clasificación de alimentos
 (deffacts clasificacion-ingredientes
@@ -169,7 +183,10 @@
     (load "cargar-recetas.clp")
     (load "pedir-informacion.clp")
     (load "obtener-compatibles.clp")
-    (load "proponer-receta.clp")
+    ;(load "proponer-receta.clp")
+    (load "pedir-informacion-incertidumbre.clp")
+    (load "calcular-similitud.clp")
+    (load "manejar-incertidumbre.clp")
 )
 
 (defrule iniciar-sistema
@@ -208,5 +225,20 @@
    =>
    ;(retract ?r)
    ;(assert (propuesta (receta ?rec)))
-   (focus proponer-receta))
+   (focus pedir-informacion-incertidumbre)
+   (assert (estado info-pedida))
+   )
+
+(defrule calcular-incertidumbre
+   (estado info-pedida)
+   =>
+   (focus calcular-similitud)
+   (assert (estado simil-calculada))
+)
+
+(defrule manejar
+   (estado simil-calculada)
+   =>
+   (focus manejar-incertidumbre)
+)
 
