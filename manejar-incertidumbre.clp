@@ -7,7 +7,8 @@
   (SimilitudTotal (valor ?mejor_v&:(> ?mejor_v ?v)))
   =>
   (printout t "--- RECETA DESCARTADA: " ?n 
-             " (similitud: " (format nil "%.2f" ?v) ")" crlf))
+             " (similitud: " (format nil "%.2f" ?v) ")" crlf)
+               (retract ?r))
 
 
 (defrule mostrar-mejor-receta

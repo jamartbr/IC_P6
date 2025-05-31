@@ -103,7 +103,7 @@
    ?r <- (receta (nombre ?n) (ingredientes $?i))
    =>
    (assert (recomendacion (receta ?r)))
-   (printout t "✅ Receta compatible: " ?n crlf)
+   (printout t " Receta compatible: " ?n crlf)
    )
 
 ; esta regla no se ejecutará nunca -> pq no esta la opcion de que no haya recetas disponibles
